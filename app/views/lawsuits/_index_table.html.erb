@@ -1,7 +1,7 @@
 <section class="bg-white dark:bg-gray-900">
   <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
     <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 align-top">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -14,7 +14,7 @@
                     <% @judicial_recoveries.each do |lawsuit| %>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4">
-                                <%= lawsuit["alias"] %>
+                                <%= link_to lawsuit["alias"], lawsuit_path(lawsuit["id"]) %>
                             </td>
                         </tr>
                     <% end %>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="relative overflow-x-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 align">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -43,7 +43,7 @@
                     <% @bankruptcies.each do |lawsuit| %>
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <td class="px-6 py-4">
-                                <%= lawsuit["alias"] %>
+                                <%= link_to lawsuit["alias"], lawsuit_path(lawsuit["id"]) %>
                             </td>
                         </tr>
                     <% end %>

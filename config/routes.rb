@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   root 'pages#index'
 
-  get 'lawsuits' => 'pages#lawsuits'
+  resources :lawsuits, only: [:index, :show]
 end

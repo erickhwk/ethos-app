@@ -2,11 +2,16 @@ require 'rest-client'
 require 'json'
 
 class ApiClient
-  API_BASE_URL = 'https://rails-production-d750.up.railway.app/'
+  # API_BASE_URL = ENV['DEBTOR_ADMIN_URL]
+  API_BASE_URL = 'http://localhost:3001'
 
-  def self.get_reports(tenancy_id)
-    response = RestClient.get("#{API_BASE_URL}/api/v1/reports?tenancy_id=#{tenancy_id}")
+  def self.get_reports(lawsuit_id)
+    response = RestClient.get("#{API_BASE_URL}/api/v1/reports?lawsuit_id=#{lawsuit_id}")
     response.body
+    parsed_json = JSON.parse(response.body)
+    parsed_json
+  rescue RestClient::ExceptionWithResponse => e
+    puts e.response 
   end
 
   def self.get_lawsuits(tenancy_id)
@@ -14,10 +19,9 @@ class ApiClient
     parsed_json = JSON.parse(response.body)
     parsed_json
   rescue RestClient::ExceptionWithResponse => e
-    # Em caso de erro, exibir a resposta do erro
     puts e.response
   end
-
+  
   def self.get_companies(tenancy_id)
     response = RestClient.get("#{API_BASE_URL}/api/v1/companies?tenancy_id=#{tenancy_id}")
     response.body
