@@ -2,8 +2,11 @@ require 'rest-client'
 require 'json'
 
 class ApiClient
-  # API_BASE_URL = ENV['DEBTOR_ADMIN_URL]
-  API_BASE_URL = 'http://localhost:3001'
+  if Rails.env.production?
+    API_BASE_URL = ENV['DEBTOR_ADMIN_URL']
+  else
+    API_BASE_URL = 'http://localhost:3000'
+  end
 
   def self.get_reports(lawsuit_id)
     response = RestClient.get("#{API_BASE_URL}/api/v1/reports?lawsuit_id=#{lawsuit_id}")
