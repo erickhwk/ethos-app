@@ -5,7 +5,7 @@ class ApiClient
   if Rails.env.production?
     API_BASE_URL = ENV['DEBTOR_ADMIN_URL']
   else
-    API_BASE_URL = 'http://localhost:3000'
+    API_BASE_URL = 'http://localhost:3001'
   end
 
   def self.get_reports(lawsuit_id)
@@ -25,8 +25,12 @@ class ApiClient
     puts e.response
   end
   
-  def self.get_companies(tenancy_id)
-    response = RestClient.get("#{API_BASE_URL}/api/v1/companies?tenancy_id=#{tenancy_id}")
+  def self.get_companies(lawsuit_id)
+    response = RestClient.get("#{API_BASE_URL}/api/v1/companies?lawsuit_id=#{lawsuit_id}")
     response.body
+    parsed_json = JSON.parse(response.body)
+    parsed_json
+  rescue RestClient::ExceptionWithResponse => e
+    puts e.response 
   end
 end

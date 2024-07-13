@@ -15,22 +15,29 @@
             <div class="prose text-base font-normal text-gray-500 dark:text-gray-400">
                 <%= raw(report["content"]) %>
             </div>
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              <% report["files"].each do |file| %>
-                <ul>
-                  <li class="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    <%= link_to file["url"] do %>
-                      <div class="flex gap-3 items-center">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
-                        </svg>
-                        <b><%= file["filename"] %></b>
-                      </div>
-                    <% end %>
-                  </li>
-                </ul>
-              <% end %>
+            <% if report["files"].present? %>
+            <p class="text-sm font-medium text-gray-300 dark:text-gray-500">
+              Arquivos anexados:
             </p>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                <% report["files"].each do |file| %>
+                  <ul>
+                      <li class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <%= link_to file["url"] do %>
+                          <div class="flex gap-3 items-center">
+                            <span class="dark:bg-gray-700 rounded py-2 px-4 flex gap-3 items-center">
+                              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8"/>
+                              </svg>
+                              <b><%= file["filename"] %></b>
+                            </span>
+                          </div>
+                        <% end %>
+                      </li>
+                  </ul>
+                <% end %>
+              </p>
+            <% end %>
             <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
               Publicado em <%= report["created_at"].to_time.strftime('%d/%m/%Y - %H:%M') %>
             </p>

@@ -9,5 +9,6 @@ class LawsuitsController < ApplicationController
     lawsuits = ApiClient.get_lawsuits(ENV['TENANCY_ID'])
     @lawsuit = lawsuits.find { |lawsuit| lawsuit['id'] == params[:id].to_i }
     @reports = ApiClient.get_reports(params[:id])
+    @companies = ApiClient.get_companies(params[:id])
   end
 end
